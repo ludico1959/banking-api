@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/ludico1959/banking-api/issues"
   },
-  "homepage": "https://github.com/ludico1959/banking-api#readme"
+  "homepage": "https://github.com/ludico1959/banking-api#readme",
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^2.1.0",
+    "eslint": "^8.52.0",
+    "typescript": "^5.2.2"
+  }
 }
