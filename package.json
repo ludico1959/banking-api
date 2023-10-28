@@ -4,7 +4,7 @@
   "description": "A banking API made with Node.js",
   "main": "index.js",
   "scripts": {
-    "start:dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respaw src/server.ts"
+    "start:dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts"
   },
   "repository": {
     "type": "git",
