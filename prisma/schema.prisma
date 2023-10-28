@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Category {
+  CNPJ
+  CPF
+}
+
+enum Method {
+  CREDIT
+  DEBT
+}
+
+enum Type {
+  PHYSICAL
+  VIRTUAL
+}
+
+model Person {
+  id            String      @id @default(uuid())
+  name          String
+  document      String      @unique
+  category      Category    
+  created_at    DateTime    @default(now())
+  updated_at    DateTime    @default(now())    
+
+  accounts      Account[]
+  transections  Transaction[]
+
+  @@map("people")
+}
+
+model Account {
+  id            String      @id @default(uuid())
+  number        String      @unique
+  branch        String      @db.Char(3)
+  created_at    DateTime    @default(now())
+  updated_at    DateTime    @default(now())    
+
+  person        Person      @relation(fields: [person_id], references: [id])
+  person_id     String
+
+  cards         Card[]
+
+  @@map("accounts")
+}
+
+model Transaction {
+  id            String      @id @default(uuid())
+  value         Float
+  description   String      
+  method        Method      
+  created_at    DateTime    @default(now())
+  updated_at    DateTime    @default(now())    
+
+  person        Person      @relation(fields: [person_id], references: [id])
+  person_id     String
+
+  @@map("transactions")
+}
+
+model Card {
+  id            String      @id @default(uuid())
+  number        String      @unique
+  type          Type        
+  cvv           String      @db.Char(3)
+  created_at    DateTime    @default(now())
+  updated_at    DateTime    @default(now())  
+
+  account       Account     @relation(fields: [account_id], references: [id])
+  account_id    String  
+
+  @@map("cards")
+}
