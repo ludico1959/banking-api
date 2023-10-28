@@ -30,8 +30,8 @@ model Person {
   name          String
   document      String      @unique
   category      Category    
-  created_at    DateTime    @default(now())
-  updated_at    DateTime    @default(now())    
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @default(now())    
 
   accounts      Account[]
   transections  Transaction[]
@@ -43,11 +43,11 @@ model Account {
   id            String      @id @default(uuid())
   number        String      @unique
   branch        String      @db.Char(3)
-  created_at    DateTime    @default(now())
-  updated_at    DateTime    @default(now())    
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @default(now())    
 
-  person        Person      @relation(fields: [person_id], references: [id])
-  person_id     String
+  person        Person      @relation(fields: [personId], references: [id])
+  personId     String
 
   cards         Card[]
 
@@ -59,11 +59,11 @@ model Transaction {
   value         Float
   description   String      
   method        Method      
-  created_at    DateTime    @default(now())
-  updated_at    DateTime    @default(now())    
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @default(now())    
 
-  person        Person      @relation(fields: [person_id], references: [id])
-  person_id     String
+  person        Person      @relation(fields: [personId], references: [id])
+  personId     String
 
   @@map("transactions")
 }
@@ -73,11 +73,11 @@ model Card {
   number        String      @unique
   type          Type        
   cvv           String      @db.Char(3)
-  created_at    DateTime    @default(now())
-  updated_at    DateTime    @default(now())  
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @default(now())  
 
-  account       Account     @relation(fields: [account_id], references: [id])
-  account_id    String  
+  account       Account     @relation(fields: [accountId], references: [id])
+  accountId    String  
 
   @@map("cards")
 }
