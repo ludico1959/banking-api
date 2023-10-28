@@ -63,7 +63,7 @@ model Transaction {
   updatedAt     DateTime    @default(now())    
 
   person        Person      @relation(fields: [personId], references: [id])
-  personId     String
+  personId      String
 
   @@map("transactions")
 }
@@ -77,7 +77,7 @@ model Card {
   updatedAt     DateTime    @default(now())  
 
   account       Account     @relation(fields: [accountId], references: [id])
-  accountId    String  
+  accountId     String  
 
   @@map("cards")
 }
