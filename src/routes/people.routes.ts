@@ -11,4 +11,10 @@ peopleRoutes.post('/', (request, response) => {
   return response.status(201).json({ name, document });
 });
 
+peopleRoutes.get('/', async (request, response) => {
+  const people = await personRepository.list();
+
+  return response.status(200).json(people);
+});
+
 export { peopleRoutes };

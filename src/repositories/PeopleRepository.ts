@@ -1,5 +1,5 @@
 import { prisma } from '../database/PrismaService';
-import { Category } from '@prisma/client';
+import { Category, Person } from '@prisma/client';
 import { PersonDTO } from '../dtos/PersonDTO';
 
 class PersonRepository {
@@ -11,6 +11,12 @@ class PersonRepository {
         category: Category.CPF,
       },
     });
+  }
+
+  async list(): Promise<Person[]> {
+    const people = await prisma.person.findMany();
+
+    return people;
   }
 }
 
