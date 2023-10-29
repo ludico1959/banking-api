@@ -1,24 +1,32 @@
-version: '3'
+version: '3.9'
 
 services: 
-  database:
+  db:
     image: postgres:latest
-    container_name: 'banking-database'
+    container_name: banking_db
     ports: 
-      - '${DB_PORT}:5432' #computer:container
+      - ${DB_PORT}:5432 #computer:container
     restart: always
-    volumes:
-      - ./database-backup:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pgdata:/data/postgres
     
-  app:
-    build: .
-    container_name: banking-api
-    ports: 
-      - '${PORT}:${PORT}'
+  # app:
+  #   build: .
+  #   container_name: banking_api
+  #   ports: 
+  #     - ${SERVER_PORT}:${SERVER_PORT}
+  #   volumes:
+  #     - .:/usr/app
+  #   links:
+  #     - db
+  #   depends_on:
+  #     - db
 
 volumes:
-  database-backup: 
+  pgdata:
+    driver: local
+
