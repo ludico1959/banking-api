@@ -1,4 +1,4 @@
-import { PersonRepository } from '../repositories/PeopleRepository';
+import { IPeopleRepository } from '../repositories/IPeopleRepository';
 
 interface IRequest {
   name: string;
@@ -6,7 +6,7 @@ interface IRequest {
 }
 
 class CreatePersonService {
-  constructor(private personRepository: PersonRepository) {}
+  constructor(private personRepository: IPeopleRepository) {}
 
   async execute({ name, document }: IRequest) {
     const personAlreadyExists =

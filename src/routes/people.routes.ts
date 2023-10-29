@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { PersonRepository } from '../repositories/PeopleRepository';
+import { PeopleRepository } from '../repositories/PeopleRepository';
 import { CreatePersonService } from '../services/CreatePersonService';
 
 const peopleRoutes = Router();
-const personRepository = new PersonRepository();
+const peopleRepository = new PeopleRepository();
 
 peopleRoutes.post('/', async (request, response) => {
   const { name, document } = request.body;
 
-  const createPersonService = new CreatePersonService(personRepository);
+  const createPersonService = new CreatePersonService(peopleRepository);
 
   createPersonService.execute({ name, document });
 
@@ -16,7 +16,7 @@ peopleRoutes.post('/', async (request, response) => {
 });
 
 peopleRoutes.get('/', async (request, response) => {
-  const people = await personRepository.list();
+  const people = await peopleRepository.list();
 
   return response.status(200).json(people);
 });
