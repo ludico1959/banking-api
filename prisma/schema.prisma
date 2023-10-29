@@ -31,7 +31,7 @@ model Person {
   document      String      @unique
   category      Category    
   createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @default(now())    
+  updatedAt     DateTime    @updatedAt    
 
   accounts      Account[]
   transections  Transaction[]
@@ -44,7 +44,7 @@ model Account {
   number        String      @unique
   branch        String      @db.Char(3)
   createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @default(now())    
+  updatedAt     DateTime    @updatedAt     
 
   person        Person      @relation(fields: [personId], references: [id])
   personId     String
@@ -60,7 +60,7 @@ model Transaction {
   description   String      
   method        Method      
   createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @default(now())    
+  updatedAt     DateTime    @updatedAt    
 
   person        Person      @relation(fields: [personId], references: [id])
   personId      String
@@ -74,7 +74,7 @@ model Card {
   type          Type        
   cvv           String      @db.Char(3)
   createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @default(now())  
+  updatedAt     DateTime    @updatedAt   
 
   account       Account     @relation(fields: [accountId], references: [id])
   accountId     String  
