@@ -1,6 +1,6 @@
-import { prisma } from '../../../database/PrismaService';
+import { prisma } from '../../../../database/PrismaService';
 import { Person } from '@prisma/client';
-import { ICreatePersonDTO, IPeopleRepository } from './IPeopleRepository';
+import { ICreatePersonDTO, IPeopleRepository } from '../IPeopleRepository';
 
 class PeopleRepository implements IPeopleRepository {
   async create({ name, document, category }: ICreatePersonDTO): Promise<void> {

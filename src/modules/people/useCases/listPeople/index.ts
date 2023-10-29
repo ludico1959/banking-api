@@ -1,4 +1,4 @@
-import { PeopleRepository } from '../../repositories/PeopleRepository';
+import { PeopleRepository } from '../../repositories/implementations/PeopleRepository';
 import { ListPeopleController } from './ListPeopleController';
 import { ListPeopleService } from './ListPeopleService';
 
