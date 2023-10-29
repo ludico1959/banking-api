@@ -1,4 +1,4 @@
-import { prisma } from '../database/PrismaService';
+import { prisma } from '../../../database/PrismaService';
 import { Category, Person } from '@prisma/client';
 import { ICreatePersonDTO, IPeopleRepository } from './IPeopleRepository';
 
