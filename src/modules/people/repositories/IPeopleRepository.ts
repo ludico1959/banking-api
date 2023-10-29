@@ -1,8 +1,9 @@
-import { Person } from '@prisma/client';
+import { Category, Person } from '@prisma/client';
 
 interface ICreatePersonDTO {
   name: string;
   document: string;
+  category: Category;
 }
 
 interface IPeopleRepository {

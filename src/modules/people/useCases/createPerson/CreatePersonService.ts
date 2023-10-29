@@ -1,3 +1,4 @@
+import { Category } from '@prisma/client';
 import { IPeopleRepository } from '../../repositories/IPeopleRepository';
 
 interface IRequest {
@@ -16,7 +17,9 @@ class CreatePersonService {
       throw new Error('Person already exists');
     }
 
-    this.peopleRepository.create({ name, document });
+    const category: Category = Category.CPF;
+
+    this.peopleRepository.create({ name, document, category });
   }
 }
 

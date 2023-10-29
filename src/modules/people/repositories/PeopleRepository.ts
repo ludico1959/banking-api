@@ -1,14 +1,14 @@
 import { prisma } from '../../../database/PrismaService';
-import { Category, Person } from '@prisma/client';
+import { Person } from '@prisma/client';
 import { ICreatePersonDTO, IPeopleRepository } from './IPeopleRepository';
 
 class PeopleRepository implements IPeopleRepository {
-  async create({ name, document }: ICreatePersonDTO): Promise<void> {
-    const person = await prisma.person.create({
+  async create({ name, document, category }: ICreatePersonDTO): Promise<void> {
+    await prisma.person.create({
       data: {
         name,
         document,
-        category: Category.CPF,
+        category,
       },
     });
   }
