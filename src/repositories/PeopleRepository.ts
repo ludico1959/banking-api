@@ -18,6 +18,16 @@ class PersonRepository {
 
     return people;
   }
+
+  async findByDocument(document: string): Promise<Person> {
+    const person = await prisma.person.findUnique({
+      where: {
+        document,
+      },
+    });
+
+    return person;
+  }
 }
 
 export { PersonRepository };

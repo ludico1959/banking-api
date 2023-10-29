@@ -4,8 +4,15 @@ import { PersonRepository } from '../repositories/PeopleRepository';
 const peopleRoutes = Router();
 const personRepository = new PersonRepository();
 
-peopleRoutes.post('/', (request, response) => {
+peopleRoutes.post('/', async (request, response) => {
   const { name, document } = request.body;
+
+  const personAlreadyExists = await personRepository.findByDocument(document);
+
+  if (personAlreadyExists) {
+    return response.status(400).json({ error: 'Person already exists' });
+  }
+
   personRepository.create({ name, document });
 
   return response.status(201).json({ name, document });
