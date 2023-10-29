@@ -6,17 +6,17 @@ interface IRequest {
 }
 
 class CreatePersonService {
-  constructor(private personRepository: IPeopleRepository) {}
+  constructor(private peopleRepository: IPeopleRepository) {}
 
   async execute({ name, document }: IRequest) {
     const personAlreadyExists =
-      await this.personRepository.findByDocument(document);
+      await this.peopleRepository.findByDocument(document);
 
     if (personAlreadyExists) {
       throw new Error('Person already exists');
     }
 
-    this.personRepository.create({ name, document });
+    this.peopleRepository.create({ name, document });
   }
 }
 
