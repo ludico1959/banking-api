@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { PersonRepository } from '../repositories/PeopleRepository';
+import { CreatePersonService } from '../services/CreatePersonService';
 
 const peopleRoutes = Router();
 const personRepository = new PersonRepository();
@@ -7,13 +8,9 @@ const personRepository = new PersonRepository();
 peopleRoutes.post('/', async (request, response) => {
   const { name, document } = request.body;
 
-  const personAlreadyExists = await personRepository.findByDocument(document);
+  const createPersonService = new CreatePersonService(personRepository);
 
-  if (personAlreadyExists) {
-    return response.status(400).json({ error: 'Person already exists' });
-  }
-
-  personRepository.create({ name, document });
+  createPersonService.execute({ name, document });
 
   return response.status(201).json({ name, document });
 });
