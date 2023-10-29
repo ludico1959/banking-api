@@ -1,9 +1,9 @@
 import { prisma } from '../database/PrismaService';
 import { Category, Person } from '@prisma/client';
-import { PersonDTO } from '../dtos/PersonDTO';
+import { ICreatePersonDTO, IPeopleRepository } from './IPeopleRepository';
 
-class PersonRepository {
-  async create({ name, document }: PersonDTO): Promise<void> {
+class PeopleRepository implements IPeopleRepository {
+  async create({ name, document }: ICreatePersonDTO): Promise<void> {
     const person = await prisma.person.create({
       data: {
         name,
@@ -30,4 +30,4 @@ class PersonRepository {
   }
 }
 
-export { PersonRepository };
+export { PeopleRepository };
