@@ -1,6 +1,7 @@
 import { Person } from '@prisma/client';
 import { prisma } from '../../../../database/PrismaService';
 import { ICreatePersonDTO, IPeopleRepository } from '../IPeopleRepository';
+import { PrivatePerson } from '../../types/PrivatePerson';
 
 class PeopleRepository implements IPeopleRepository {
   async create({
@@ -19,8 +20,18 @@ class PeopleRepository implements IPeopleRepository {
     });
   }
 
-  async list(): Promise<Person[]> {
-    const people = await prisma.person.findMany();
+  async list(): Promise<PrivatePerson[]> {
+    const people = await prisma.person.findMany({
+      select: {
+        id: true,
+        name: true,
+        document: true,
+        password: false,
+        category: false,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
 
     return people;
   }

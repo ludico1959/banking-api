@@ -1,4 +1,5 @@
 import { Category, Person } from '@prisma/client';
+import { PrivatePerson } from '../types/PrivatePerson';
 
 interface ICreatePersonDTO {
   name: string;
@@ -9,7 +10,7 @@ interface ICreatePersonDTO {
 
 interface IPeopleRepository {
   findByDocument(document: string): Promise<Person>;
-  list(): Promise<Person[]>;
+  list(): Promise<PrivatePerson[]>;
   create({
     name,
     document,
