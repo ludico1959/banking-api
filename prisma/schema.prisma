@@ -20,6 +20,11 @@ enum Type {
   VIRTUAL
 }
 
+enum Method {
+  CREDIT
+  DEBIT
+}
+
 model Person {
   id            String      @id @default(uuid())
   name          String
@@ -39,7 +44,7 @@ model Account {
   id            String      @id @default(uuid())
   account       String      
   branch        String      @db.Char(3)
-  balance       Decimal     @db.Decimal(9,2) @default(2000.00)
+  balance       Decimal     @db.Decimal(9,2) @default(0.00)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt     
 
@@ -55,7 +60,8 @@ model Account {
 model Transaction {
   id            String      @id @default(uuid())
   value         Decimal     @db.Decimal(9,2)
-  description   String        
+  description   String 
+  method        Method       
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt    
 
