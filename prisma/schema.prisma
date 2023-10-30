@@ -35,7 +35,7 @@ model Person {
   updatedAt     DateTime    @updatedAt    
 
   accounts      Account[]
-  transections  Transaction[]
+  cards         Card[]
 
   @@map("people")
 }
@@ -52,6 +52,7 @@ model Account {
   personId      String
 
   cards         Card[]
+  transections  Transaction[]
 
   @@map("accounts")
 }
@@ -64,8 +65,8 @@ model Transaction {
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt    
 
-  person        Person      @relation(fields: [personId], references: [id])
-  personId      String
+  account       Account     @relation(fields: [accountId], references: [id])
+  accountId     String
 
   @@map("transactions")
 }
@@ -80,6 +81,9 @@ model Card {
 
   account       Account     @relation(fields: [accountId], references: [id])
   accountId     String  
+
+  person        Person      @relation(fields: [personId], references: [id])
+  personId      String  
 
   @@map("cards")
 }
