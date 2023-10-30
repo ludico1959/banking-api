@@ -4,7 +4,7 @@
   "description": "A banking API made with Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/server.ts"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,22 @@
   "bugs": {
     "url": "https://github.com/ludico1959/banking-api/issues"
   },
-  "homepage": "https://github.com/ludico1959/banking-api#readme"
+  "homepage": "https://github.com/ludico1959/banking-api#readme",
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^2.1.0",
+    "@types/bcrypt": "^5.0.1",
+    "@types/express": "^4.17.20",
+    "eslint": "^8.52.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.5.2",
+    "bcrypt": "^5.1.1",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "prisma": "^5.5.2",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.8.0"
+  }
 }

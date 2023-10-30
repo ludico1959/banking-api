@@ -1,0 +1,305 @@
+{
+	"info": {
+		"_postman_id": "42e4165e-e033-4f63-9693-8c46919cda19",
+		"name": "BankingAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17605616"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Create account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"branch\": \"111\",\n    \"account\": \"1112222-3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/people/d39355eb-258d-41d0-aa2e-b6f90a5e2e8d/accounts",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"people",
+								"d39355eb-258d-41d0-aa2e-b6f90a5e2e8d",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List accounts by person",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/people/d39355eb-258d-41d0-aa2e-b6f90a5e2e8d/accounts",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"people",
+								"d39355eb-258d-41d0-aa2e-b6f90a5e2e8d",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Person",
+			"item": [
+				{
+					"name": "Create person",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"John Doe\",\n    \"document\": \"111.111.333-99\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/people",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"people"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List people",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/people",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"people"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Card",
+			"item": [
+				{
+					"name": "Create card",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cvv\": \"790\",\n    \"number\": \"5179 7447 8594 6978\",\n    \"type\": \"physical\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/people/dc07326a-3eae-4827-b7f9-720586c7731f/cards",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"people",
+								"dc07326a-3eae-4827-b7f9-720586c7731f",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List cards by account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/accounts/2d3d3396-4630-4573-9134-21babfdc13e4/cards",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"accounts",
+								"2d3d3396-4630-4573-9134-21babfdc13e4",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List cards by person",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/people/d39355eb-258d-41d0-aa2e-b6f90a5e2e8d/cards",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"people",
+								"d39355eb-258d-41d0-aa2e-b6f90a5e2e8d",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction",
+			"item": [
+				{
+					"name": "Create transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"value\": 200.0,\n    \"description\": \"Rancho de inicio de mes\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/accounts/2d3d3396-4630-4573-9134-21babfdc13e4/transactions?method=credit",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"accounts",
+								"2d3d3396-4630-4573-9134-21babfdc13e4",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "method",
+									"value": "credit"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List transactions by account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/accounts/2d3d3396-4630-4573-9134-21babfdc13e4/transactions",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"accounts",
+								"2d3d3396-4630-4573-9134-21babfdc13e4",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Balance from account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/accounts/2d3d3396-4630-4573-9134-21babfdc13e4/balance",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"accounts",
+								"2d3d3396-4630-4573-9134-21babfdc13e4",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Revert transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Estorno do supermercado\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/accounts/2d3d3396-4630-4573-9134-21babfdc13e4/transactions/477c19c7-470a-499d-aa38-42cbaddfb062/revert",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"accounts",
+								"2d3d3396-4630-4573-9134-21babfdc13e4",
+								"transactions",
+								"477c19c7-470a-499d-aa38-42cbaddfb062",
+								"revert"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get hello",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

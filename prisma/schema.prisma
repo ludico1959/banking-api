@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Category {
+  CNPJ
+  CPF
+}
+
+enum Type {
+  PHYSICAL
+  VIRTUAL
+}
+
+enum Method {
+  CREDIT
+  DEBIT
+}
+
+model Person {
+  id            String      @id @default(uuid())
+  name          String
+  document      String      @unique
+  password      String      
+  category      Category    
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt    
+
+  accounts      Account[]
+  cards         Card[]
+
+  @@map("people")
+}
+
+model Account {
+  id            String      @id @default(uuid())
+  account       String      
+  branch        String      @db.Char(3)
+  balance       Decimal     @db.Decimal(9,2) @default(0.00)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt     
+
+  person        Person      @relation(fields: [personId], references: [id])
+  personId      String
+
+  cards         Card[]
+  transections  Transaction[]
+
+  @@map("accounts")
+}
+
+model Transaction {
+  id            String      @id @default(uuid())
+  value         Decimal     @db.Decimal(9,2)
+  description   String 
+  method        Method
+  wasReversed   Boolean     @default(false)  
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt    
+
+  account       Account     @relation(fields: [accountId], references: [id])
+  accountId     String
+
+  @@map("transactions")
+}
+
+model Card {
+  id            String      @id @default(uuid())
+  number        String      @unique
+  type          Type        
+  cvv           String      @db.Char(3)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt   
+
+  account       Account     @relation(fields: [accountId], references: [id])
+  accountId     String  
+
+  person        Person      @relation(fields: [personId], references: [id])
+  personId      String  
+
+  @@map("cards")
+}
