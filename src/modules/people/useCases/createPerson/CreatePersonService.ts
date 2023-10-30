@@ -1,5 +1,6 @@
 import { Category } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
+import { hash } from 'bcrypt';
 import { IPeopleRepository } from '../../repositories/IPeopleRepository';
 
 interface IRequest {
@@ -25,7 +26,14 @@ class CreatePersonService {
 
     const category: Category = Category.CPF;
 
-    this.peopleRepository.create({ name, document, password, category });
+    const passwordHash = await hash(password, 8);
+
+    this.peopleRepository.create({
+      name,
+      document,
+      password: passwordHash,
+      category,
+    });
   }
 }
 

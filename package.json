@@ -18,6 +18,7 @@
   "homepage": "https://github.com/ludico1959/banking-api#readme",
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.1.0",
+    "@types/bcrypt": "^5.0.1",
     "@types/express": "^4.17.20",
     "@types/swagger-ui-express": "^4.1.5",
     "eslint": "^8.52.0",
@@ -26,6 +27,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.5.2",
+    "bcrypt": "^5.1.1",
     "express": "^4.18.2",
     "prisma": "^5.5.2",
     "reflect-metadata": "^0.1.13",
