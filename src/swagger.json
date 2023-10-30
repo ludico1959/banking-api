@@ -43,7 +43,7 @@
            "201": {
              "description": "Created"
            },
-           "500": {
+           "400": {
              "description": "Person already exists"
            }
          }

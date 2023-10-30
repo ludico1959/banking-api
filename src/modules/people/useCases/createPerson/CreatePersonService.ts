@@ -2,6 +2,7 @@ import { Category } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 import { hash } from 'bcrypt';
 import { IPeopleRepository } from '../../repositories/IPeopleRepository';
+import { AppError } from '../../../../errors/AppError';
 
 interface IRequest {
   name: string;
@@ -21,7 +22,7 @@ class CreatePersonService {
       await this.peopleRepository.findByDocument(document);
 
     if (personAlreadyExists) {
-      throw new Error('Person already exists');
+      throw new AppError('Person already exists');
     }
 
     const category: Category = Category.CPF;
