@@ -40,7 +40,7 @@ class AccountsRepository implements IAccountsRepository {
     account: string,
     branch: string,
   ): Promise<Account> {
-    const foundAccount = await prisma.account.findUnique({
+    const foundAccount = await prisma.account.findFirst({
       where: {
         account,
         branch,
