@@ -4,8 +4,6 @@ import { ListPeopleService } from './ListPeopleService';
 
 class ListPeopleController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { take, page } = request.params;
-
     const listPeopleService = container.resolve(ListPeopleService);
 
     const all = await listPeopleService.execute();
