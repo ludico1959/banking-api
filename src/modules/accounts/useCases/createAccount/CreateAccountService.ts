@@ -21,8 +21,8 @@ class CreateAccountService {
     private peopleRepository: IPeopleRepository,
   ) {}
 
-  async execute(personId: string, { branch, account }: IRequest) {
-    const personExists = await this.peopleRepository.findById(personId);
+  async execute(peopleId: string, { branch, account }: IRequest) {
+    const personExists = await this.peopleRepository.findById(peopleId);
 
     if (!personExists) throw new AppError('Person not found.', 404);
 
@@ -40,7 +40,7 @@ class CreateAccountService {
     this.accountsRepository.create({
       branch,
       account,
-      personId,
+      personId: peopleId,
     });
   }
 }
