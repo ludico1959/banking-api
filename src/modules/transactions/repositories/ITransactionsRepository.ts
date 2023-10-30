@@ -1,9 +1,10 @@
-import { Transaction } from '@prisma/client';
+import { Method, Transaction } from '@prisma/client';
 import { TransactionData } from '../types/TransactionData';
 
 interface ICreateTransactionDTO {
   value: number;
   description: string;
+  method: Method;
   accountId: string;
 }
 
@@ -13,6 +14,7 @@ interface ITransactionsRepository {
   create({
     value,
     description,
+    method,
     accountId,
   }: ICreateTransactionDTO): Promise<TransactionData>;
 }

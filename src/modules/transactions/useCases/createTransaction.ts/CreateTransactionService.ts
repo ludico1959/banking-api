@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import { Method } from '@prisma/client';
 import { AppError } from '../../../../errors/AppError';
 import { IAccountsRepository } from '../../../accounts/repositories/IAccountsRepository';
 import { ITransactionsRepository } from '../../repositories/ITransactionsRepository';
@@ -7,6 +8,7 @@ import { TransactionData } from '../../types/TransactionData';
 interface IRequest {
   value: number;
   description: string;
+  method: string;
 }
 
 @injectable()
@@ -20,22 +22,41 @@ class CreateTransactionService {
 
   async execute(
     accountId: string,
-    { value, description }: IRequest,
+    { value, description, method }: IRequest,
   ): Promise<TransactionData> {
-    const accountExists = await this.accountsRepository.findById(accountId);
+    const account = await this.accountsRepository.findById(accountId);
 
-    if (!accountExists) throw new AppError('Account does not exists.', 404);
+    if (!account) throw new AppError('Account does not exists.', 404);
 
-    if (Number(accountExists.balance) < value)
-      throw new AppError('Insufficient funds.');
+    let transactionMethod: Method;
+    let newBalance: number;
 
-    const newBalance = Number(accountExists.balance) - value;
+    switch (method) {
+      case 'debit':
+        transactionMethod = Method.DEBIT;
+
+        if (Number(account.balance) < value)
+          throw new AppError('Insufficient funds.');
+
+        newBalance = Number(account.balance) - value;
+
+        break;
+      case 'credit':
+        transactionMethod = Method.CREDIT;
+
+        newBalance = Number(account.balance) + value;
+
+        break;
+      default:
+        throw new AppError('Invalid transaction method.');
+    }
 
     await this.accountsRepository.updateBalance(accountId, newBalance);
 
     const transaction = await this.transactionsRepository.create({
       value,
       description,
+      method: transactionMethod,
       accountId,
     });
 

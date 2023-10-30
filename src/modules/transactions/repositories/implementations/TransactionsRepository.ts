@@ -10,12 +10,14 @@ class TransactionsRepository implements ITransactionsRepository {
   async create({
     value,
     description,
+    method,
     accountId,
   }: ICreateTransactionDTO): Promise<TransactionData> {
     const transaction = await prisma.transaction.create({
       data: {
         value,
         description,
+        method,
         accountId,
       },
     });
