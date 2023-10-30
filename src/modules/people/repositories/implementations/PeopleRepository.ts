@@ -45,6 +45,16 @@ class PeopleRepository implements IPeopleRepository {
 
     return person;
   }
+
+  async findById(id: string): Promise<Person> {
+    const person = await prisma.person.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return person;
+  }
 }
 
 export { PeopleRepository };

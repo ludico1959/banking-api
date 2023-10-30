@@ -33,9 +33,7 @@ class CreatePersonService {
     const personAlreadyExists =
       await this.peopleRepository.findByDocument(document);
 
-    if (personAlreadyExists) {
-      throw new AppError('Person already exists.');
-    }
+    if (personAlreadyExists) throw new AppError('Person already exists.');
 
     const passwordHash = await hash(password, 8);
 

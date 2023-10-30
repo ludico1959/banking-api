@@ -9,7 +9,7 @@ class CreatePersonController {
 
     await createPersonService.execute({ name, document, password });
 
-    return response.status(201).json({ name, document });
+    return response.status(201).json({ message: 'Person created.' });
   }
 }
 

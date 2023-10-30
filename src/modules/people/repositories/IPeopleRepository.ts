@@ -9,6 +9,7 @@ interface ICreatePersonDTO {
 }
 
 interface IPeopleRepository {
+  findById(id: string): Promise<Person>;
   findByDocument(document: string): Promise<Person>;
   list(): Promise<PrivatePerson[]>;
   create({
