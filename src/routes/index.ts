@@ -7,6 +7,6 @@ const router = Router();
 
 router.use('/people', peopleRoutes);
 router.use('/people', accountsRoutes);
-router.use('/people', cardsRoutes);
+router.use('/', cardsRoutes);
 
 export { router };
