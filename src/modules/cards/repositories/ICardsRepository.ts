@@ -10,8 +10,9 @@ interface ICreateCardDTO {
 interface ICardsRepository {
   findById(id: string): Promise<Card>;
   findByNumber(number: string): Promise<Card>;
+  findByType(cardType: Type): Promise<Card>;
   list(): Promise<Card[]>;
-  create({ type, number, cvv, accountId }: ICreateCardDTO): Promise<void>;
+  create({ type, number, cvv, accountId }: ICreateCardDTO): Promise<Card>;
 }
 
 export { ICreateCardDTO, ICardsRepository };

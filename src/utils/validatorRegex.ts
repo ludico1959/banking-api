@@ -9,3 +9,9 @@ export function validateBranchAndCvv(digits: string): boolean {
 
   return regex.test(digits);
 }
+
+export function validateCardNumber(number: string): boolean {
+  const regex = /^\d{4} \d{4} \d{4} \d{4}$/i;
+
+  return regex.test(number);
+}

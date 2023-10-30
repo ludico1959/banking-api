@@ -1,4 +1,4 @@
-import { Card } from '@prisma/client';
+import { Card, Type } from '@prisma/client';
 import { prisma } from '../../../../database/PrismaService';
 import { ICreateCardDTO, ICardsRepository } from '../ICardsRepository';
 
@@ -8,8 +8,8 @@ class CardsRepository implements ICardsRepository {
     number,
     cvv,
     accountId,
-  }: ICreateCardDTO): Promise<void> {
-    await prisma.card.create({
+  }: ICreateCardDTO): Promise<Card> {
+    const card = await prisma.card.create({
       data: {
         type,
         number,
@@ -17,6 +17,8 @@ class CardsRepository implements ICardsRepository {
         accountId,
       },
     });
+
+    return card;
   }
 
   async list(): Promise<Card[]> {
@@ -39,6 +41,16 @@ class CardsRepository implements ICardsRepository {
     const card = await prisma.card.findUnique({
       where: {
         id,
+      },
+    });
+
+    return card;
+  }
+
+  async findByType(typeCard: Type): Promise<Card> {
+    const card = await prisma.card.findFirst({
+      where: {
+        type: typeCard,
       },
     });
 

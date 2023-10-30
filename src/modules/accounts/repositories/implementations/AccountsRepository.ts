@@ -8,14 +8,16 @@ class AccountsRepository implements IAccountsRepository {
     branch,
     account,
     personId,
-  }: ICreateAccountDTO): Promise<void> {
-    await prisma.account.create({
+  }: ICreateAccountDTO): Promise<AccountData> {
+    const createdAccount = await prisma.account.create({
       data: {
         branch,
         account,
         personId,
       },
     });
+
+    return createdAccount;
   }
 
   async listByPerson(personId: string): Promise<AccountData[]> {
@@ -48,6 +50,16 @@ class AccountsRepository implements IAccountsRepository {
     });
 
     return foundAccount;
+  }
+
+  async findById(id: string): Promise<Account> {
+    const account = await prisma.account.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    return account;
   }
 }
 

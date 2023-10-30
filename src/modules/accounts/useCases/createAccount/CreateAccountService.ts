@@ -6,6 +6,7 @@ import {
   validateAccount,
   validateBranchAndCvv,
 } from '../../../../utils/validatorRegex';
+import { AccountData } from '../../types/AccountData';
 
 interface IRequest {
   branch: string;
@@ -21,7 +22,10 @@ class CreateAccountService {
     private peopleRepository: IPeopleRepository,
   ) {}
 
-  async execute(peopleId: string, { branch, account }: IRequest) {
+  async execute(
+    peopleId: string,
+    { branch, account }: IRequest,
+  ): Promise<AccountData> {
     const personExists = await this.peopleRepository.findById(peopleId);
 
     if (!personExists) throw new AppError('Person not found.', 404);
@@ -37,11 +41,23 @@ class CreateAccountService {
 
     if (accountAlreadyExists) throw new AppError('Account already exists.');
 
-    this.accountsRepository.create({
+    const createdAccount = await this.accountsRepository.create({
       branch,
       account,
       personId: peopleId,
     });
+
+    const accountData = {
+      id: createdAccount.id,
+      branch: createdAccount.branch,
+      account: createdAccount.account,
+      createdAt: createdAccount.createdAt,
+      updatedAt: createdAccount.updatedAt,
+    };
+
+    return accountData;
+
+    return createdAccount;
   }
 }
 

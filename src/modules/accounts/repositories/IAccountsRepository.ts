@@ -9,8 +9,13 @@ interface ICreateAccountDTO {
 
 interface IAccountsRepository {
   findByAccountAndBranch(account: string, branch: string): Promise<Account>;
+  findById(id: string): Promise<Account>;
   listByPerson(personId: string): Promise<AccountData[]>;
-  create({ branch, account, personId }: ICreateAccountDTO): Promise<void>;
+  create({
+    branch,
+    account,
+    personId,
+  }: ICreateAccountDTO): Promise<AccountData>;
 }
 
 export { ICreateAccountDTO, IAccountsRepository };

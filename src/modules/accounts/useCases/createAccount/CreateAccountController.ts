@@ -9,9 +9,12 @@ class CreateAccountController {
 
     const createAccountService = container.resolve(CreateAccountService);
 
-    await createAccountService.execute(peopleId, { branch, account });
+    const createdAccount = await createAccountService.execute(peopleId, {
+      branch,
+      account,
+    });
 
-    return response.status(201).json({ message: 'Account created.' });
+    return response.status(201).json(createdAccount);
   }
 }
 
