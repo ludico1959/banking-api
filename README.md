@@ -1,6 +1,10 @@
+![diagrams](diagrams.png) 
+
 # BANKING API
 
-Uma API que simula um simples sistema bancário, com contas e transações de crédito e débito.
+Banking API é API que simula um simples sistema de contas bancário, com contas e transações de crédito e débito.
+Na imagem acima, é possível ver a base inicial da modelagem do banco de dados através dos respectivos diagramas conceitual (DER) e lógico.
+Vale destacar que, durante o desenvolvimento da API, foram feitas algumas alterações no modelo físico com relação às entidades e aos atributos.
 
 ## 💻 Passo a passo para testar API em máquina local
 
