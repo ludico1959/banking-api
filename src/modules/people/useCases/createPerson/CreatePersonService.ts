@@ -20,6 +20,11 @@ class CreatePersonService {
   ) {}
 
   async execute({ name, document, password }: IRequest) {
+    if (name.length <= 3) throw new AppError('Invalid name.');
+
+    if (password.length < 6)
+      throw new AppError('Invalid password (less than 6 digits).');
+
     let category: Category;
     if (validateCPF(document)) category = Category.CPF;
     else if (validateCNPJ(document)) category = Category.CNPJ;
