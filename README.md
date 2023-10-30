@@ -1,5 +1,6 @@
+<p align="center">
 ![diagrams](diagrams.png)
-
+</p>
 
 # BANKING API
 
