@@ -29,6 +29,7 @@ model Person {
   id            String      @id @default(uuid())
   name          String
   document      String      @unique
+  password      String      
   category      Category    
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt    
