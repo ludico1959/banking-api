@@ -66,6 +66,7 @@ class CreateCardService {
       number,
       type: typeCard,
       accountId,
+      personId: accountExists.personId,
     });
 
     const cardData = {
