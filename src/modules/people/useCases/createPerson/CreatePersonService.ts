@@ -1,4 +1,5 @@
 import { Category } from '@prisma/client';
+import { inject, injectable } from 'tsyringe';
 import { IPeopleRepository } from '../../repositories/IPeopleRepository';
 
 interface IRequest {
@@ -6,8 +7,12 @@ interface IRequest {
   document: string;
 }
 
+@injectable()
 class CreatePersonService {
-  constructor(private peopleRepository: IPeopleRepository) {}
+  constructor(
+    @inject('PeopleRepository')
+    private peopleRepository: IPeopleRepository,
+  ) {}
 
   async execute({ name, document }: IRequest) {
     const personAlreadyExists =

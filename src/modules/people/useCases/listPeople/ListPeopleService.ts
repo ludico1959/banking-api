@@ -1,8 +1,13 @@
 import { Person } from '@prisma/client';
 import { IPeopleRepository } from '../../repositories/IPeopleRepository';
+import { inject, injectable } from 'tsyringe';
 
+@injectable()
 class ListPeopleService {
-  constructor(private peopleRepository: IPeopleRepository) {}
+  constructor(
+    @inject('PeopleRepository')
+    private peopleRepository: IPeopleRepository,
+  ) {}
 
   async execute(): Promise<Person[]> {
     const people = await this.peopleRepository.list();

@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
 import { CreatePersonService } from './CreatePersonService';
 
 class CreatePersonController {
-  constructor(private createPersonService: CreatePersonService) {}
-
-  handle(request: Request, response: Response): Response {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { name, document } = request.body;
+    const createPersonService = container.resolve(CreatePersonService);
 
-    this.createPersonService.execute({ name, document });
+    await createPersonService.execute({ name, document });
 
     return response.status(201).json({ name, document });
   }

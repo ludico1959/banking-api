@@ -1,15 +1,13 @@
 import { Router } from 'express';
-import { createPersonController } from '../modules/people/useCases/createPerson';
-import { listPeopleController } from '../modules/people/useCases/listPeople';
+import { CreatePersonController } from '../modules/people/useCases/createPerson/CreatePersonController';
+import { ListPeopleController } from '../modules/people/useCases/listPeople/ListPeopleController';
 
 const peopleRoutes = Router();
 
-peopleRoutes.post('/', async (request, response) => {
-  return createPersonController.handle(request, response);
-});
+const createPersonController = new CreatePersonController();
+const listPeopleController = new ListPeopleController();
 
-peopleRoutes.get('/', async (request, response) => {
-  return listPeopleController.handle(request, response);
-});
+peopleRoutes.post('/', createPersonController.handle);
+peopleRoutes.get('/', listPeopleController.handle);
 
 export { peopleRoutes };
