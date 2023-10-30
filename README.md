@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="" target="blank"><img src="https://github.com/ludico1959/banking-api/develop/diagrams.png" height="200" alt="Diagramas conceitual e logico" /></a>
+  ![Image Alt text](/diagrams.png)
 </p>
 
 # BANKING API
