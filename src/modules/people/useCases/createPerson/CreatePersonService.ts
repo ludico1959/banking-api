@@ -3,6 +3,8 @@ import { inject, injectable } from 'tsyringe';
 import { hash } from 'bcrypt';
 import { IPeopleRepository } from '../../repositories/IPeopleRepository';
 import { AppError } from '../../../../errors/AppError';
+import { validateCPF } from '../../../../utils/validatorCPF';
+import { validateCNPJ } from '../../../../utils/validatorCNPJ';
 
 interface IRequest {
   name: string;
@@ -18,14 +20,17 @@ class CreatePersonService {
   ) {}
 
   async execute({ name, document, password }: IRequest) {
+    let category: Category;
+    if (validateCPF(document)) category = Category.CPF;
+    else if (validateCNPJ(document)) category = Category.CNPJ;
+    else throw new AppError('Invalid document.');
+
     const personAlreadyExists =
       await this.peopleRepository.findByDocument(document);
 
     if (personAlreadyExists) {
-      throw new AppError('Person already exists');
+      throw new AppError('Person already exists.');
     }
-
-    const category: Category = Category.CPF;
 
     const passwordHash = await hash(password, 8);
 
