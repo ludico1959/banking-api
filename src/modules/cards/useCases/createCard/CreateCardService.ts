@@ -34,7 +34,7 @@ class CreateCardService {
 
     const accountExists = await this.accountsRepository.findById(accountId);
 
-    if (!accountExists) throw new AppError('Account does not exists.', 404);
+    if (!accountExists) throw new AppError('Account does not exist.', 404);
 
     const cardAlreadyExists = await this.cardsRepository.findByNumber(number);
 

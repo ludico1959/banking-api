@@ -5,12 +5,6 @@ import { IAccountsRepository } from '../../../accounts/repositories/IAccountsRep
 import { ITransactionsRepository } from '../../repositories/ITransactionsRepository';
 import { TransactionData } from '../../types/TransactionData';
 
-interface IRequest {
-  value: number;
-  description: string;
-  method: string;
-}
-
 @injectable()
 class CreateTransactionService {
   constructor(
@@ -22,29 +16,38 @@ class CreateTransactionService {
 
   async execute(
     accountId: string,
-    { value, description, method }: IRequest,
+    transactionId: string,
+    description: string,
   ): Promise<TransactionData> {
     const account = await this.accountsRepository.findById(accountId);
 
-    if (!account) throw new AppError('Account does not exists.', 404);
+    if (!account) throw new AppError('Account does not exist.', 404);
+
+    const transaction =
+      await this.transactionsRepository.findById(transactionId);
+
+    if (!transaction) throw new AppError('Transaction does not exist.', 404);
 
     let transactionMethod: Method;
     let newBalance: number;
 
-    switch (method) {
-      case 'debit':
-        transactionMethod = Method.DEBIT;
-
-        if (Number(account.balance) < value)
-          throw new AppError('Insufficient funds.');
-
-        newBalance = Number(account.balance) - value;
-
-        break;
-      case 'credit':
+    switch (transaction.method) {
+      case Method.DEBIT:
         transactionMethod = Method.CREDIT;
 
-        newBalance = Number(account.balance) + value;
+        newBalance = Number(account.balance) + Number(transaction.value);
+
+        break;
+      case Method.CREDIT:
+        transactionMethod = Method.DEBIT;
+
+        if (account.balance < transaction.value)
+          throw new AppError(
+            'Insuficient funds for reverting transaction.',
+            404,
+          );
+
+        newBalance = Number(account.balance) - Number(transaction.value);
 
         break;
       default:
@@ -53,19 +56,19 @@ class CreateTransactionService {
 
     await this.accountsRepository.updateBalance(accountId, newBalance);
 
-    const transaction = await this.transactionsRepository.create({
-      value,
+    const revertedTransaction = await this.transactionsRepository.create({
+      value: Number(transaction.value),
       description,
       method: transactionMethod,
       accountId,
     });
 
     const transactionData = {
-      id: transaction.id,
-      value: transaction.value,
-      description: transaction.description,
-      createdAt: transaction.createdAt,
-      updatedAt: transaction.updatedAt,
+      id: revertedTransaction.id,
+      value: revertedTransaction.value,
+      description: revertedTransaction.description,
+      createdAt: revertedTransaction.createdAt,
+      updatedAt: revertedTransaction.updatedAt,
     };
 
     return transactionData;
