@@ -44,6 +44,7 @@ model Account {
   id            String      @id @default(uuid())
   account       String      
   branch        String      @db.Char(3)
+  balance       Decimal     @db.Money @default(2000.00)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt     
 
