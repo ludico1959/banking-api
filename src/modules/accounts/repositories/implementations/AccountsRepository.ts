@@ -61,6 +61,17 @@ class AccountsRepository implements IAccountsRepository {
 
     return account;
   }
+
+  async updateBalance(accountId: string, newBalance: number): Promise<void> {
+    await prisma.account.update({
+      where: {
+        id: accountId,
+      },
+      data: {
+        balance: newBalance,
+      },
+    });
+  }
 }
 
 export { AccountsRepository };
