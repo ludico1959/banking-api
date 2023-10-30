@@ -42,7 +42,7 @@ model Person {
 
 model Account {
   id            String      @id @default(uuid())
-  account       String      @unique
+  account       String      
   branch        String      @db.Char(3)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt     
