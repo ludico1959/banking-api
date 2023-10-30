@@ -1,0 +1,86 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Banking API.",
+    "description": "This is a banking API",
+    "version": "1.0.0",
+    "contact": {
+      "email":"ludico1959@gmail.com"
+    }
+  },
+  "paths": {
+    "/people": {
+      "post": {
+        "tags": ["Person"],
+        "summary": "Create a person",
+         "description": "Create a new person",
+         "requestBody": {
+           "content": {
+             "application/json": {
+               "schema": {
+                 "type": "object",
+                 "properties": {
+                   "name": {
+                     "type": "string"
+                   },
+                   "document": {
+                     "type": "string"
+                   }
+                 },
+                 "example": {
+                   "name": "John Doe",
+                   "document": "310.700.090-67"
+                 }
+               }
+             }
+           }
+         },
+         "responses": {
+           "201": {
+             "description": "Created"
+           },
+           "500": {
+             "description": "Person already exists"
+           }
+         }
+      },
+      "get": {
+        "tags": ["Person"],
+        "summary": "List all people",
+        "description": "List all people",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "document": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string"
+                      },
+                      "updatedAt": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
