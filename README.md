@@ -1,5 +1,4 @@
-![diagrams](diagrams.png)
-s 
+![diagrams](diagrams.png) 
 
 # BANKING API
 
