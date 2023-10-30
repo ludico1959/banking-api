@@ -16,7 +16,8 @@ interface IAccountsRepository {
     account,
     personId,
   }: ICreateAccountDTO): Promise<AccountData>;
-  updateBalance(accountIdId: string, value: number): Promise<void>;
+  updateBalance(accountId: string, value: number): Promise<void>;
+  getBalance(accountId: string): Promise<number>;
 }
 
 export { ICreateAccountDTO, IAccountsRepository };

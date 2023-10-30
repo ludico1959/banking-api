@@ -72,6 +72,18 @@ class AccountsRepository implements IAccountsRepository {
       },
     });
   }
+
+  async getBalance(accountId: string): Promise<number> {
+    const account = await prisma.account.findFirst({
+      where: {
+        id: accountId,
+      },
+    });
+
+    const balance = Number(account.balance);
+
+    return balance;
+  }
 }
 
 export { AccountsRepository };

@@ -7,7 +7,7 @@ import { transactionsRoutes } from './transactions.routes';
 const router = Router();
 
 router.use('/people', peopleRoutes);
-router.use('/people', accountsRoutes);
+router.use('/', accountsRoutes);
 router.use('/', cardsRoutes);
 router.use('/accounts', transactionsRoutes);
 
