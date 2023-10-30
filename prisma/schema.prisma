@@ -15,11 +15,6 @@ enum Category {
   CPF
 }
 
-enum Method {
-  CREDIT
-  DEBT
-}
-
 enum Type {
   PHYSICAL
   VIRTUAL
@@ -44,7 +39,7 @@ model Account {
   id            String      @id @default(uuid())
   account       String      
   branch        String      @db.Char(3)
-  balance       Decimal     @db.Money @default(2000.00)
+  balance       Decimal     @db.Decimal(9,2) @default(2000.00)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt     
 
@@ -59,9 +54,8 @@ model Account {
 
 model Transaction {
   id            String      @id @default(uuid())
-  value         Float
-  description   String      
-  method        Method      
+  value         Decimal     @db.Decimal(9,2)
+  description   String        
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt    
 
