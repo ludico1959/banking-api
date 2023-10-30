@@ -17,6 +17,7 @@ interface ITransactionsRepository {
     method,
     accountId,
   }: ICreateTransactionDTO): Promise<TransactionData>;
+  updateReverseStatus(id: string): Promise<void>;
 }
 
 export { ICreateTransactionDTO, ITransactionsRepository };

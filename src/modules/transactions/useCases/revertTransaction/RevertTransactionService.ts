@@ -6,7 +6,7 @@ import { ITransactionsRepository } from '../../repositories/ITransactionsReposit
 import { TransactionData } from '../../types/TransactionData';
 
 @injectable()
-class CreateTransactionService {
+class RevertTransactionService {
   constructor(
     @inject('TransactionsRepository')
     private transactionsRepository: ITransactionsRepository,
@@ -28,9 +28,13 @@ class CreateTransactionService {
 
     if (!transaction) throw new AppError('Transaction does not exist.', 404);
 
+    if (transaction.wasReversed)
+      throw new AppError('Transaction was already reversed.');
+
     let transactionMethod: Method;
     let newBalance: number;
 
+    console.log(transaction.method);
     switch (transaction.method) {
       case Method.DEBIT:
         transactionMethod = Method.CREDIT;
@@ -41,7 +45,8 @@ class CreateTransactionService {
       case Method.CREDIT:
         transactionMethod = Method.DEBIT;
 
-        if (account.balance < transaction.value)
+        console.log(`${account.balance} - ${transaction.value}`);
+        if (Number(account.balance) < Number(transaction.value))
           throw new AppError(
             'Insuficient funds for reverting transaction.',
             404,
@@ -53,6 +58,8 @@ class CreateTransactionService {
       default:
         throw new AppError('Invalid transaction method.');
     }
+
+    this.transactionsRepository.updateReverseStatus(transactionId);
 
     await this.accountsRepository.updateBalance(accountId, newBalance);
 
@@ -75,4 +82,4 @@ class CreateTransactionService {
   }
 }
 
-export { CreateTransactionService };
+export { RevertTransactionService };

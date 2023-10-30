@@ -52,6 +52,17 @@ class TransactionsRepository implements ITransactionsRepository {
 
     return transaction;
   }
+
+  async updateReverseStatus(id: string): Promise<void> {
+    await prisma.transaction.update({
+      where: {
+        id,
+      },
+      data: {
+        wasReversed: true,
+      },
+    });
+  }
 }
 
 export { TransactionsRepository };

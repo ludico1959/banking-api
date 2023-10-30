@@ -1,18 +1,18 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
-import { CreateTransactionService } from './RevertTransactionService';
+import { RevertTransactionService } from './RevertTransactionService';
 
-class CreateTransactionController {
+class RevertTransactionController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { description } = request.body;
     const accountId = request.params.accountId;
     const transactionId = request.params.transactionId;
 
-    const createTransactionService = container.resolve(
-      CreateTransactionService,
+    const revertTransactionService = container.resolve(
+      RevertTransactionService,
     );
 
-    const card = await createTransactionService.execute(
+    const card = await revertTransactionService.execute(
       accountId,
       transactionId,
       description,
@@ -21,4 +21,4 @@ class CreateTransactionController {
   }
 }
 
-export { CreateTransactionController };
+export { RevertTransactionController };
