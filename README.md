@@ -1,6 +1,5 @@
-<p align="center">
-  ![Image Alt text](/diagrams.png)
-</p>
+![diagrams](diagrams.png)
+
 
 # BANKING API
 
