@@ -25,11 +25,15 @@
                    },
                    "document": {
                      "type": "string"
+                   },
+                   "password": {
+                     "type": "string"
                    }
                  },
                  "example": {
                    "name": "John Doe",
-                   "document": "310.700.090-67"
+                   "document": "310.700.090-67",
+                   "password": "123456"
                  }
                }
              }
@@ -65,6 +69,9 @@
                         "type": "string"
                       },
                       "document": {
+                        "type": "string"
+                      },
+                      "password": {
                         "type": "string"
                       },
                       "createdAt": {

@@ -5,6 +5,7 @@ import { IPeopleRepository } from '../../repositories/IPeopleRepository';
 interface IRequest {
   name: string;
   document: string;
+  password: string;
 }
 
 @injectable()
@@ -14,7 +15,7 @@ class CreatePersonService {
     private peopleRepository: IPeopleRepository,
   ) {}
 
-  async execute({ name, document }: IRequest) {
+  async execute({ name, document, password }: IRequest) {
     const personAlreadyExists =
       await this.peopleRepository.findByDocument(document);
 
@@ -24,7 +25,7 @@ class CreatePersonService {
 
     const category: Category = Category.CPF;
 
-    this.peopleRepository.create({ name, document, category });
+    this.peopleRepository.create({ name, document, password, category });
   }
 }
 
