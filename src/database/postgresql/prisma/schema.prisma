@@ -42,7 +42,7 @@ model Person {
 
 model Account {
   id            String      @id @default(uuid())
-  account       String      
+  account       String      @db.Char(9)
   branch        String      @db.Char(3)
   balance       Decimal     @db.Decimal(9,2) @default(0.00)
   createdAt     DateTime    @default(now())
@@ -74,7 +74,7 @@ model Transaction {
 
 model Card {
   id            String      @id @default(uuid())
-  number        String      @unique
+  number        String      @db.Char(19) @unique
   type          Type        
   cvv           String      @db.Char(3)
   createdAt     DateTime    @default(now())
