@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "ts-node-dev --transpile-only --ignore-watch node_modules --respawn src/app/server.ts",
-    "start:prod": "node src/app/server.ts"
+    "start:prod": "ts-node src/app/server.ts"
   },
   "prisma": {
-  "schema": "src/database/postgresql/prisma/schema.prisma"
-} ,
+    "schema": "src/database/postgresql/prisma/schema.prisma"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ludico1959/banking-api.git"
@@ -31,10 +31,12 @@
   "dependencies": {
     "@prisma/client": "^5.5.2",
     "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
     "prisma": "^5.5.2",
     "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.9.1",
     "tsyringe": "^4.8.0"
   }
 }
