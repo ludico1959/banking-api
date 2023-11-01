@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { CreateTransactionController } from '../modules/transactions/useCases/createTransaction/CreateTransactionController';
-import { ListTransactionsController } from '../modules/transactions/useCases/listTransactionByAccount/ListCardsByAccountController';
-import { RevertTransactionController } from '../modules/transactions/useCases/revertTransaction/RevertTransactionController';
+import { CreateTransactionController } from '../app/modules/transactions/useCases/createTransaction/CreateTransactionController';
+import { ListTransactionsController } from '../app/modules/transactions/useCases/listTransactionByAccount/ListCardsByAccountController';
+import { RevertTransactionController } from '../app/modules/transactions/useCases/revertTransaction/RevertTransactionController';
 
 const transactionsRoutes = Router();
 

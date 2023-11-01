@@ -1,5 +1,5 @@
 import { Person } from '@prisma/client';
-import { prisma } from '../../../../database/PrismaService';
+import { prisma } from '../../../../../database/postgresql/PrismaService';
 import { ICreatePersonDTO, IPeopleRepository } from '../IPeopleRepository';
 import { PrivatePerson } from '../../types/PrivatePerson';
 

@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { CreatePersonController } from '../modules/people/useCases/createPerson/CreatePersonController';
-import { ListPeopleController } from '../modules/people/useCases/listPeople/ListPeopleController';
+import { ListPeopleController } from '../app/modules/people/useCases/listPeople/ListPeopleController';
+import { CreatePersonController } from '../app/modules/people/useCases/createPerson/CreatePersonController';
 
 const peopleRoutes = Router();
 

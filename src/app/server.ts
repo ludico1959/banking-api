@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import './shared/container';
-import { router } from './routes';
+import { router } from '../routes';
 import { AppError } from './errors/AppError';
 
 const app = express();

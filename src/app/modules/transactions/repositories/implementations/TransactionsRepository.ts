@@ -1,4 +1,4 @@
-import { prisma } from '../../../../database/PrismaService';
+import { prisma } from '../../../../../database/postgresql/PrismaService';
 import {
   ICreateTransactionDTO,
   ITransactionsRepository,

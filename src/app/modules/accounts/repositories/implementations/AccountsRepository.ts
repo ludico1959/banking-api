@@ -1,5 +1,5 @@
 import { Account } from '@prisma/client';
-import { prisma } from '../../../../database/PrismaService';
+import { prisma } from '../../../../../database/postgresql/PrismaService';
 import { ICreateAccountDTO, IAccountsRepository } from '../IAccountsRepository';
 import { AccountData } from '../../types/AccountData';
 

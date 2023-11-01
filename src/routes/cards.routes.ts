@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { CreateCardController } from '../modules/cards/useCases/createCard/CreateCardController';
-import { ListCardsByAccountController } from '../modules/cards/useCases/listCardsByAccount/ListCardsByAccountController';
-import { ListCardsByPersonController } from '../modules/cards/useCases/listCardsByPerson/ListCardsByPersonController';
+import { CreateCardController } from '../app/modules/cards/useCases/createCard/CreateCardController';
+import { ListCardsByAccountController } from '../app/modules/cards/useCases/listCardsByAccount/ListCardsByAccountController';
+import { ListCardsByPersonController } from '../app/modules/cards/useCases/listCardsByPerson/ListCardsByPersonController';
 
 const cardsRoutes = Router();
 

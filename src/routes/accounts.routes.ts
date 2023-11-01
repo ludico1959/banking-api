@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { CreateAccountController } from '../modules/accounts/useCases/createAccount/CreateAccountController';
-import { ListAccountsController } from '../modules/accounts/useCases/listAccountsByPerson/ListAccountsController';
-import { GetBalanceController } from '../modules/accounts/useCases/getBalance/GetBalanceController';
+import { GetBalanceController } from '../app/modules/accounts/useCases/getBalance/GetBalanceController';
+import { CreateAccountController } from '../app/modules/accounts/useCases/createAccount/CreateAccountController';
+import { ListAccountsController } from '../app/modules/accounts/useCases/listAccountsByPerson/ListAccountsController';
 
 const accountsRoutes = Router();
 

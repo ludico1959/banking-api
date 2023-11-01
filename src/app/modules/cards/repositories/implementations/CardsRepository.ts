@@ -1,5 +1,5 @@
 import { Card, Type } from '@prisma/client';
-import { prisma } from '../../../../database/PrismaService';
+import { prisma } from '../../../../../database/postgresql/PrismaService';
 import { ICreateCardDTO, ICardsRepository } from '../ICardsRepository';
 import { CardData } from '../../types/CardData';
 
